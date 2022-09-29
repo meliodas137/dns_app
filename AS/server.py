@@ -31,11 +31,8 @@ while True:
     
     if len(data) == 2:
         df = pd.read_csv('.\AS\db.csv')
-        a_dict = (df.loc[df['NAME'] == data['NAME']]).to_dict(orient='reccords')
-        response = ""
-        for key in a_dict:
-            response = response + key + "=" + a_dict[key]+"\n"
-
-        server_socket.sendto(str.encode(response), address)
+        a_dict = df.loc[df['NAME'] == data[1], 'VALUE'].array[0]
+        # response = df.to_string(a_dict)
+        server_socket.sendto(str.encode(a_dict), address)
 
     server_socket.sendto(str.encode("Fails"), address)

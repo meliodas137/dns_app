@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 import socket
+import requests
 app = Flask(__name__)
 
-@app.route('/fibonacci', methods=['GET'])
+@app.route('/fibonacci', methods=['GET'], strict_slashes=False)
 def get_params():
     args = request.args
     hostname = args.get('hostname')
@@ -16,7 +17,9 @@ def get_params():
 
     ip = getIpFromDNS(as_ip, as_port)
 
-    return app.redirect(ip+':'+'%s/fibonacci?number=%s'%(fs_port, number))
+    url ='http://%s:%s/fibonacci?number=%s'%(ip, fs_port, number)
+    print(url)
+    return requests.get(url).content
 
 def getIpFromDNS(as_ip, as_port):
     messageToSend = "TYPE=A \n NAME=fibonacci.com\n"
@@ -25,12 +28,6 @@ def getIpFromDNS(as_ip, as_port):
     sock.sendto(str.encode(messageToSend), ('%s'%(as_ip), as_port))
 
     msg, server = sock.recvfrom(1024)
-    msgData = msg.split("\n")
-    data = {}
-    for d in msgData:
-        field = d.split["="]
-        data[field[0]] = field[1]
-    
-    return data['VALUE']
+    return msg.decode('utf8')
 
 app.run(host='0.0.0.0', port=8080, debug=True)
