@@ -1,0 +1,4 @@
+TYPE,NAME,VALUE,TTL
+A,127.0.0.1,fibonacci.com,10
+TYPE,NAME,VALUE,TTL
+A,127.0.0.1,fibonacci.com,10
