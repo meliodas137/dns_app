@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/register', methods=['PUT'])
 def register():
-    body = request.json
+    body = app.request.json
     hostname = body['hostname']
     ip = body['ip']
     as_ip = body['as_ip']
@@ -17,17 +17,17 @@ def register():
 
     response = sock.recv(1024)
     if(response == "success"): return (response, 201)
-    return ("Fail", 201)
+    return ("Fail", 400)
 
 
 @app.route('/fibonacci', methods=['GET'])
 def fibonacci():
-    args = request.args
+    args = app.request.args
     number = args.get('number')
-    if(not isinstance(i, int)):
-        return ("Fail", 201)
+    if(not isinstance(number, int)):
+        return ("Fail", 400)
     
-    return (getFibonacci(number), 201)
+    return (getFibonacci(number), 200)
 
 def getFibonacci(X):
     if X <= 1: return X

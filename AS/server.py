@@ -1,12 +1,9 @@
 from encodings import utf_8
 from pandas import pd
 import socket
-import csv
 
 app = Flask(__name__)
 columns  = ('TYPE', 'NAME', 'VALUE', 'TTL')
-
-
 
 UDP_PORT = 53533
 
@@ -34,8 +31,3 @@ while True:
             response = response + key + "=" + a_dict[key]+"\n"
 
         server_socket.sendto(str.encode(response), address)
-
-    
-
-
-# @app.route('/fibonacci', methods=['GET'])

@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/fibonacci', methods=['GET'])
 def get_params():
-    args = Flask.request.args
+    args = app.request.args
     hostname = args.get('hostname')
     fs_port = args.get('fs_port')
     number = args.get('number')
