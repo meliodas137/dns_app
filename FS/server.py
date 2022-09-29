@@ -15,7 +15,7 @@ def register():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(str.encode(messageToSend), ('0.0.0.0', 53533))
 
-    response = sock.recv(1024)
+    response = sock.recvfrom(1024)
     if(response == "success"): return (response, 201)
     return ("Fail", 400)
 
