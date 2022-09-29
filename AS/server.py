@@ -14,3 +14,5 @@ def get_params():
         abort(400)
     
     return 
+
+app.run(host='0.0.0.0', port=8080, debug=True)
