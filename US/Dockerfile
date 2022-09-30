@@ -13,7 +13,8 @@ WORKDIR /app
 
 RUN pip install Flask \
     && pip install -U pandas==0.24.2 \ 
-    && pip install -U numpy==1.18.0
+    && pip install -U numpy==1.18.0 \
+    && pip install requests
 
 USER nyu
 
